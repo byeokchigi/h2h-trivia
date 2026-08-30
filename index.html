@@ -1,591 +1,888 @@
 <!doctype html>
 <html lang="en">
+
 <head>
+
 <meta charset="utf-8">
 
 <meta name="viewport"
-content="width=device-width, initial-scale=1.0,
-maximum-scale=1.0, user-scalable=no">
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
 
-<title>Hearts2Hearts Trivia</title>
+<title>Hearts2Hearts — Trivia Quiz</title>
 
 <style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
 *{
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+html,
+body{
   margin:0;
+  padding:0;
+  width:100%;
   min-height:100%;
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  color:#432f4a;
 }
 
 body{
+
   min-height:100vh;
+
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color:#294b6b;
+
   display:flex;
   justify-content:center;
   align-items:center;
+
   overflow-x:hidden;
 
+  /* SKY BLUE THEME */
+
   background:
-    radial-gradient(circle at 20% 10%,#ffffffaa 0 8%,transparent 30%),
-    radial-gradient(circle at 85% 20%,#e7d9ffaa 0 10%,transparent 32%),
-    linear-gradient(135deg,#ffdce9,#e8ddff 48%,#d9efff);
+
+    radial-gradient(
+      circle at 15% 8%,
+      #ffffff 0%,
+      transparent 25%
+    ),
+
+    radial-gradient(
+      circle at 90% 90%,
+      #dff4ff 0%,
+      transparent 30%
+    ),
+
+    linear-gradient(
+      145deg,
+      #9ed2f2,
+      #c9e9fa 48%,
+      #87c5eb
+    );
 }
+
+
+/* =====================================================
+   MAIN GAME
+===================================================== */
 
 .game{
-  width:min(900px,94vw);
-  padding:24px 0 40px;
-}
 
-/* ================================
-   HEADER
-================================ */
+  width:min(760px,94vw);
 
-.header{
+  padding:22px 0 35px;
+
   text-align:center;
-  margin-bottom:20px;
 }
+
+
+/* =====================================================
+   HEADER
+===================================================== */
 
 .logo{
-  font-size:clamp(38px,9vw,70px);
+
+  margin:0;
+
+  font-size:
+    clamp(38px,9vw,70px);
+
+  line-height:1;
+
   font-weight:1000;
+
   letter-spacing:-3px;
 
-  background:
-    linear-gradient(
-      90deg,
-      #ec5797,
-      #a66be8,
-      #55bce9
-    );
+  color:#ffffff;
 
-  color:transparent;
-  background-clip:text;
+  text-shadow:
+    0 4px 12px rgba(40,100,150,.25);
 }
 
-.header p{
-  margin:5px 0 0;
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:4px;
-  opacity:.65;
+.subtitle{
+
+  margin:12px 0 24px;
+
+  color:#ffffff;
+
+  font-size:13px;
+
+  font-weight:1000;
+
+  letter-spacing:5px;
+
+  text-shadow:
+    0 2px 7px rgba(40,100,150,.2);
 }
 
-/* ================================
-   CARD
-================================ */
+
+/* =====================================================
+   QUIZ CARD
+===================================================== */
 
 .quizCard{
-  background:#ffffffaa;
-  border:1px solid #ffffff;
-  border-radius:30px;
-  padding:22px;
 
-  box-shadow:
-    0 20px 60px #754e7b22,
-    inset 0 0 30px #ffffff88;
-
-  backdrop-filter:blur(14px);
-}
-
-/* ================================
-   PROGRESS
-================================ */
-
-.progressRow{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
-
-  font-size:12px;
-  font-weight:900;
-}
-
-.progressBar{
   width:100%;
-  height:9px;
-  background:#ffffffaa;
-  border-radius:999px;
-  overflow:hidden;
-  margin-bottom:20px;
-}
 
-.progressFill{
-  width:0%;
-  height:100%;
-  border-radius:999px;
+  padding:28px;
+
+  border-radius:32px;
 
   background:
-    linear-gradient(
-      90deg,
-      #ed619f,
-      #a477e8,
-      #5dc8ed
-    );
+    rgba(255,255,255,.78);
 
-  transition:width .35s;
-}
+  border:
+    2px solid rgba(255,255,255,.9);
 
-/* ================================
-   QUESTION
-================================ */
+  box-shadow:
+    0 25px 70px rgba(45,100,145,.25);
 
-.questionNumber{
+  backdrop-filter:blur(15px);
+
   text-align:center;
-
-  font-size:11px;
-  font-weight:1000;
-  letter-spacing:3px;
-  color:#a05291;
-
-  margin-bottom:8px;
 }
+
+
+/* =====================================================
+   STEP LABEL
+===================================================== */
+
+.step{
+
+  margin-bottom:10px;
+
+  color:#6badd2;
+
+  font-size:13px;
+
+  font-weight:1000;
+
+  letter-spacing:4px;
+}
+
+
+/* =====================================================
+   QUESTION
+===================================================== */
 
 .question{
-  text-align:center;
 
-  font-size:clamp(22px,5vw,34px);
-  line-height:1.2;
+  margin:0 auto 24px;
+
+  max-width:620px;
+
+  color:#294b6b;
+
+  font-size:
+    clamp(25px,6vw,39px);
+
+  line-height:1.15;
 
   font-weight:1000;
 
-  margin:0 auto 20px;
+  letter-spacing:-1px;
 }
 
-/* ================================
-   FAVORITE MEMBER
-================================ */
 
-.memberGrid{
+/* =====================================================
+   MEMBER CHOICES
+===================================================== */
+
+.memberChoices{
+
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:12px;
+
+  width:100%;
+
+  align-items:start;
 }
 
 .memberChoice{
+
+  width:100%;
+
+  height:60px;
+
+  min-height:60px;
+
+  max-height:60px;
+
+  padding:0 14px;
+
   border:0;
-  padding:0;
-  overflow:hidden;
 
-  border-radius:18px;
+  border-radius:999px;
 
-  background:#fff;
+  background:#ffffff;
+
+  color:#315574;
+
+  font-size:19px;
+
+  font-weight:900;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
 
   cursor:pointer;
 
-  box-shadow:0 5px 16px #6f426022;
+  box-shadow:
+    0 6px 18px rgba(50,110,160,.14);
 
   transition:
     transform .15s,
+    background .15s,
     box-shadow .15s;
 }
 
 .memberChoice:hover{
-  transform:translateY(-3px);
+
+  background:#eefaff;
+
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 9px 22px rgba(50,110,160,.2);
 }
 
 .memberChoice:active{
+
   transform:scale(.97);
 }
 
-.memberChoice img{
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:cover;
-  display:block;
-}
 
-.memberChoice span{
-  display:block;
-  padding:9px 4px;
+/* =====================================================
+   QUIZ ANSWERS
+===================================================== */
 
-  font-weight:1000;
-  font-size:14px;
-}
+.answers{
 
-/* ================================
-   OPTIONS
-================================ */
-
-.options{
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
   gap:12px;
+
+  width:100%;
 }
 
-.option{
-  min-height:70px;
+.answer{
 
-  border:2px solid #ffffff;
+  min-height:68px;
+
+  padding:12px 16px;
+
   border-radius:18px;
 
-  background:#ffffffcc;
+  border:
+    2px solid #d7edf9;
 
-  color:#49354d;
+  background:#ffffff;
+
+  color:#315574;
 
   font-size:16px;
-  font-weight:900;
 
-  padding:14px;
+  font-weight:850;
 
   cursor:pointer;
 
-  box-shadow:0 5px 16px #6f426018;
-
   transition:
-    transform .12s,
+    transform .15s,
     background .15s,
     border .15s;
 }
 
-.option:hover{
+.answer:hover{
+
+  background:#effaff;
+
   transform:translateY(-2px);
-  background:#fff;
 }
 
-.option:active{
-  transform:scale(.98);
+.answer.correct{
+
+  background:#b9efd5;
+
+  border-color:#56c995;
+
+  color:#185c42;
 }
 
-.option.correct{
-  background:#d7f7e6;
-  border-color:#5dc992;
+.answer.wrong{
+
+  background:#ffd0d5;
+
+  border-color:#ee7782;
+
+  color:#8c2935;
 }
 
-.option.wrong{
-  background:#ffe0e6;
-  border-color:#e96982;
+.answer.disabled{
+
+  pointer-events:none;
 }
 
-/* ================================
-   FEEDBACK
-================================ */
 
-.feedback{
-  display:none;
-
-  margin-top:16px;
-  padding:15px;
-
-  border-radius:17px;
-
-  background:#ffffffaa;
-
-  text-align:center;
-
-  font-size:14px;
-  line-height:1.5;
-  font-weight:800;
-}
-
-.feedback.show{
-  display:block;
-}
-
-.feedback.good{
-  border:2px solid #70d3a2;
-}
-
-.feedback.bad{
-  border:2px solid #ee8198;
-}
+/* =====================================================
+   NEXT BUTTON
+===================================================== */
 
 .nextButton{
-  display:none;
 
   width:100%;
-  margin-top:12px;
 
   min-height:58px;
 
+  margin-top:18px;
+
   border:0;
-  border-radius:17px;
+
+  border-radius:18px;
 
   background:
     linear-gradient(
       90deg,
-      #eb609c,
-      #9d72e6
+      #55b9eb,
+      #78d0f4
     );
 
   color:white;
 
-  font-size:17px;
+  font-size:18px;
+
   font-weight:1000;
 
   cursor:pointer;
+
+  box-shadow:
+    0 8px 24px rgba(65,160,215,.25);
+
+  display:none;
 }
 
 .nextButton.show{
+
   display:block;
 }
 
-/* ================================
-   FAVORITE RESULT
-================================ */
+.nextButton:active{
 
-.favoriteResult{
-  display:none;
-
-  text-align:center;
-
-  padding:15px;
-
-  margin-bottom:18px;
-
-  border-radius:20px;
-
-  background:#ffffffaa;
-
-  font-weight:900;
+  transform:scale(.98);
 }
 
-.favoriteResult.show{
-  display:block;
+
+/* =====================================================
+   SCORE
+===================================================== */
+
+.scoreBar{
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:10px;
+
+  margin-bottom:20px;
+
+  flex-wrap:wrap;
 }
 
-.favoriteResult img{
-  width:100px;
-  height:100px;
-  object-fit:cover;
-  border-radius:50%;
+.scoreBox{
 
-  border:4px solid white;
+  padding:9px 18px;
 
-  box-shadow:0 6px 20px #0002;
+  border-radius:999px;
+
+  background:
+    rgba(255,255,255,.72);
+
+  color:#47799b;
+
+  font-weight:1000;
+
+  font-size:14px;
+
+  box-shadow:
+    0 4px 12px rgba(50,100,140,.1);
 }
 
-/* ================================
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progress{
+
+  width:100%;
+
+  height:9px;
+
+  margin-bottom:22px;
+
+  border-radius:999px;
+
+  background:#dceff9;
+
+  overflow:hidden;
+}
+
+.progressFill{
+
+  height:100%;
+
+  width:0%;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #58bce9,
+      #9bdcf8
+    );
+
+  transition:
+    width .35s ease;
+}
+
+
+/* =====================================================
    RESULT SCREEN
-================================ */
+===================================================== */
 
 .result{
+
   display:none;
+
   text-align:center;
 }
 
 .result.show{
+
   display:block;
 }
 
 .resultHeart{
-  font-size:65px;
+
+  font-size:70px;
+
+  margin-bottom:10px;
 }
 
-.result h2{
-  margin:5px 0;
+.resultTitle{
 
-  font-size:clamp(30px,8vw,48px);
+  margin:0 0 10px;
+
+  color:#315574;
+
+  font-size:
+    clamp(30px,7vw,48px);
+
   font-weight:1000;
 }
 
-.score{
-  font-size:50px;
+.resultScore{
+
+  margin-bottom:18px;
+
+  color:#5ca6ce;
+
+  font-size:25px;
+
   font-weight:1000;
-
-  background:
-    linear-gradient(
-      90deg,
-      #e65c9c,
-      #8c6be1
-    );
-
-  color:transparent;
-  background-clip:text;
 }
 
-.resultText{
-  font-size:16px;
-  font-weight:800;
-  opacity:.75;
+.resultMessage{
+
+  margin:0 auto 24px;
+
+  max-width:520px;
+
+  color:#55758c;
+
+  line-height:1.6;
+
+  font-weight:700;
 }
 
-.restart{
-  margin-top:20px;
+.restartButton{
 
   border:0;
+
+  min-height:58px;
+
+  padding:0 28px;
+
   border-radius:999px;
 
-  padding:14px 26px;
+  background:#ffffff;
 
-  background:#45334d;
-  color:white;
+  color:#39759c;
 
-  font-size:15px;
+  font-size:17px;
+
   font-weight:1000;
 
   cursor:pointer;
+
+  box-shadow:
+    0 7px 20px rgba(50,110,150,.15);
 }
 
-/* ================================
-   SOURCE
-================================ */
 
-.source{
-  text-align:center;
-  margin-top:18px;
+/* =====================================================
+   FAVORITE RESULT
+===================================================== */
 
-  font-size:10px;
-  line-height:1.5;
-  opacity:.55;
+.favorite{
+
+  margin-top:20px;
+
+  padding:16px;
+
+  border-radius:20px;
+
+  background:
+    rgba(255,255,255,.65);
+
+  border:
+    1px solid #ffffff;
+
+  color:#47718c;
+
+  font-weight:800;
 }
 
-.source a{
-  color:inherit;
+.favorite strong{
+
+  color:#2975a2;
+
+  font-size:21px;
 }
 
-/* ================================
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+
+  margin-top:20px;
+
+  padding:0 10px;
+
+  color:#ffffff;
+
+  font-size:12px;
+
+  line-height:1.6;
+
+  font-weight:650;
+
+  text-shadow:
+    0 2px 5px rgba(40,90,130,.25);
+}
+
+
+/* =====================================================
    MOBILE
-================================ */
+===================================================== */
 
 @media(max-width:600px){
 
   .game{
+
     width:94vw;
+
     padding-top:15px;
   }
 
   .quizCard{
-    padding:14px;
-    border-radius:24px;
+
+    padding:20px 14px;
+
+    border-radius:27px;
   }
 
-  .memberGrid{
-    grid-template-columns:repeat(2,1fr);
+  .logo{
+
+    font-size:43px;
+
+    letter-spacing:-2px;
   }
 
-  .options{
-    grid-template-columns:1fr;
-  }
+  .subtitle{
 
-  .option{
-    min-height:62px;
+    font-size:10px;
+
+    letter-spacing:3px;
   }
 
   .question{
+
+    font-size:27px;
+
+    margin-bottom:20px;
+  }
+
+  .memberChoices{
+
+    gap:10px;
+  }
+
+  .memberChoice{
+
+    height:58px;
+
+    min-height:58px;
+
+    max-height:58px;
+
+    font-size:16px;
+
+    padding:0 8px;
+  }
+
+  .answers{
+
+    grid-template-columns:1fr;
+
+    gap:10px;
+  }
+
+  .answer{
+
+    min-height:60px;
+
+    font-size:15px;
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
+
+@media(max-width:380px){
+
+  .memberChoice{
+
+    font-size:14px;
+  }
+
+  .question{
+
     font-size:24px;
   }
 
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="game">
 
-  <div class="header">
 
-    <div class="logo">
-      Hearts2Hearts 💗
-    </div>
+  <!-- HEADER -->
 
-    <p>
-      THE ULTIMATE TRIVIA QUIZ
-    </p>
+  <h1 class="logo">
+    Hearts2Hearts 🩵
+  </h1>
 
+  <div class="subtitle">
+    THE ULTIMATE TRIVIA QUIZ
   </div>
 
 
+  <!-- QUIZ CARD -->
+
   <div class="quizCard">
 
-    <!-- FAVORITE MEMBER -->
 
-    <div
-      id="favoriteScreen"
-    >
+    <!-- =================================================
+         FAVORITE MEMBER SCREEN
+    ================================================== -->
 
-      <div class="questionNumber">
+    <div id="favoriteScreen">
+
+      <div class="step">
         BEFORE WE START
       </div>
 
       <h2 class="question">
-        Who is your favorite member
-        of Hearts2Hearts?
+        Who is your favorite member of Hearts2Hearts?
       </h2>
 
-      <div
-        id="memberGrid"
-        class="memberGrid"
-      ></div>
+
+      <div class="memberChoices">
+
+
+        <button
+          class="memberChoice"
+          onclick="chooseFavorite('Carmen')"
+        >
+          🌴 Carmen
+        </button>
+
+
+        <button
+          class="memberChoice"
+          onclick="chooseFavorite('Jiwoo')"
+        >
+          🍓 Jiwoo
+        </button>
+
+
+        <button
+          class="memberChoice"
+          onclick="chooseFavorite('Yuha')"
+        >
+          🎀 Yuha
+        </button>
+
+
+        <button
+          class="memberChoice"
+          onclick="chooseFavorite('Stella')"
+        >
+          🧁 Stella
+        </button>
+
+
+        <button
+          class="memberChoice"
+          onclick="chooseFavorite('Juun')"
+        >
+          👾 Juun
+        </button>
+
+
+        <button
+          class="memberChoice"
+          onclick="chooseFavorite('A-na')"
+        >
+          🌻 A-na
+        </button>
+
+
+        <button
+          class="memberChoice"
+          onclick="chooseFavorite('Ian')"
+        >
+          🫛 Ian
+        </button>
+
+
+        <button
+          class="memberChoice"
+          onclick="chooseFavorite('Ye-on')"
+        >
+          😊 Ye-on
+        </button>
+
+
+      </div>
 
     </div>
 
 
-    <!-- QUIZ -->
+    <!-- =================================================
+         QUIZ SCREEN
+    ================================================== -->
 
-    <div
-      id="quizScreen"
-      style="display:none;"
-    >
+    <div id="quizScreen" style="display:none;">
 
-      <div class="progressRow">
 
-        <span id="progressText">
-          Question 1
-        </span>
+      <div class="scoreBar">
 
-        <span>
-          Score: <span id="score">0</span>
-        </span>
+        <div class="scoreBox">
+          Question
+          <span id="questionNumber">1</span>/12
+        </div>
+
+        <div class="scoreBox">
+          Score:
+          <span id="score">0</span>
+        </div>
 
       </div>
 
 
-      <div class="progressBar">
+      <div class="progress">
+
         <div
           id="progressFill"
           class="progressFill"
         ></div>
+
       </div>
 
 
-      <div
-        id="favoriteResult"
-        class="favoriteResult"
-      ></div>
-
-
-      <div
-        id="questionNumber"
-        class="questionNumber"
-      ></div>
+      <div class="step">
+        HEARTS2HEARTS TRIVIA
+      </div>
 
 
       <h2
-        id="question"
+        id="questionText"
         class="question"
-      ></h2>
+      >
+        Question
+      </h2>
 
 
       <div
-        id="options"
-        class="options"
-      ></div>
-
-
-      <div
-        id="feedback"
-        class="feedback"
+        id="answers"
+        class="answers"
       ></div>
 
 
       <button
         id="nextButton"
         class="nextButton"
+        onclick="nextQuestion()"
       >
-        NEXT QUESTION 💗
+        NEXT QUESTION →
       </button>
+
 
     </div>
 
 
-    <!-- RESULT -->
+    <!-- =================================================
+         RESULT SCREEN
+    ================================================== -->
 
     <div
       id="resultScreen"
@@ -593,41 +890,60 @@ body{
     >
 
       <div class="resultHeart">
-        💗
+        🩵
       </div>
 
-      <h2>
+      <h2 class="resultTitle">
         Quiz Complete!
       </h2>
 
       <div
-        id="finalScore"
-        class="score"
+        id="resultScore"
+        class="resultScore"
       >
-        0/15
+        0 / 12
       </div>
 
       <p
-        id="resultText"
-        class="resultText"
+        id="resultMessage"
+        class="resultMessage"
       ></p>
 
+
+      <div class="favorite">
+
+        Your favorite member:
+
+        <br>
+
+        <strong id="favoriteResult">
+          —
+        </strong>
+
+      </div>
+
+
+      <br>
+
+
       <button
-        id="restartButton"
-        class="restart"
+        class="restartButton"
+        onclick="restartQuiz()"
       >
-        PLAY AGAIN
+        🔄 PLAY AGAIN
       </button>
 
     </div>
 
+
   </div>
 
 
-  <div class="source">
+  <div class="footer">
 
-    Facts based on the Hearts2Hearts member
-    profiles and facts pages at KProfiles.
+    Fan-made Hearts2Hearts trivia quiz.
+    Information is based on member profiles and
+    fun-fact pages from KProfiles.
 
     <br>
 
@@ -636,432 +952,260 @@ body{
 
   </div>
 
+
 </div>
+
 
 
 <script>
 
 /* =====================================================
-   MEMBER IMAGES
-=====================================================
-
-   Put these image files in the SAME folder as this HTML.
-
-   If your pictures are inside an "images" folder,
-   change for example:
-
-       "Carmen.jpg"
-
-   to:
-
-       "images/Carmen.jpg"
-
+   MEMBER DATA
 ===================================================== */
 
 const members = [
 
   {
     name:"Carmen",
-    emoji:"🌴",
-    image:"Carmen.jpg"
+    emoji:"🌴"
   },
 
   {
     name:"Jiwoo",
-    emoji:"🍓",
-    image:"Jiwoo.jpg"
+    emoji:"🍓"
   },
 
   {
     name:"Yuha",
-    emoji:"🎀",
-    image:"Yuha.jpg"
+    emoji:"🎀"
   },
 
   {
     name:"Stella",
-    emoji:"🧁",
-    image:"Stella.jpg"
+    emoji:"🧁"
   },
 
   {
     name:"Juun",
-    emoji:"👾",
-    image:"Juun.jpg"
+    emoji:"👾"
   },
 
   {
     name:"A-na",
-    emoji:"🌻",
-    image:"A-na.jpg"
+    emoji:"🌻"
   },
 
   {
     name:"Ian",
-    emoji:"🫛",
-    image:"Ian.jpg"
+    emoji:"🫛"
   },
 
   {
     name:"Ye-on",
-    emoji:"😊",
-    image:"Ye-on.jpg"
+    emoji:"😊"
   }
 
 ];
 
 
 /* =====================================================
-   TRIVIA QUESTIONS
+   QUIZ QUESTIONS
 ===================================================== */
 
 const questions = [
 
   {
-    q:"When did Hearts2Hearts debut?",
-    options:[
-      "February 24, 2025",
-      "March 28, 2025",
-      "January 1, 2025",
-      "June 18, 2025"
-    ],
-    answer:0,
-    explanation:
-      "Hearts2Hearts debuted on February 24, 2025."
-  },
+    question:
+      "Which member is the first Indonesian idol to debut under SM Entertainment?",
 
-
-  {
-    q:"Which member was born in Denpasar, Bali, Indonesia?",
-    options:[
+    answers:[
       "Carmen",
-      "Stella",
-      "A-na",
-      "Ian"
-    ],
-    answer:0,
-    explanation:
-      "Carmen was born in Denpasar, Bali, Indonesia."
-  },
-
-
-  {
-    q:"Which member studied ballet for 6–7 years?",
-    options:[
       "Jiwoo",
-      "Yuha",
-      "Juun",
-      "Ye-on"
+      "Stella",
+      "Yuha"
     ],
-    answer:0,
-    explanation:
-      "Jiwoo studied ballet for 6–7 years, starting when she was six."
+
+    correct:"Carmen"
   },
 
 
   {
-    q:"Which member trained for 8 years?",
-    options:[
-      "Carmen",
-      "Yuha",
-      "Stella",
+    question:
+      "Which member trained in ballet for around 6–7 years?",
+
+    answers:[
+      "Jiwoo",
+      "Ian",
+      "Juun",
       "A-na"
     ],
-    answer:1,
-    explanation:
-      "Yuha trained for 8 years, the longest among the Hearts2Hearts members."
+
+    correct:"Jiwoo"
   },
 
 
   {
-    q:"Which member can play piano, guitar, drums, and violin?",
-    options:[
+    question:
+      "Which member can play piano, guitar, drums and violin?",
+
+    answers:[
       "Carmen",
-      "Jiwoo",
+      "Stella",
+      "Ye-on",
+      "Juun"
+    ],
+
+    correct:"Carmen"
+  },
+
+
+  {
+    question:
+      "Which member moved to Vancouver, Canada when she was 4 or 5 years old?",
+
+    answers:[
+      "Stella",
+      "Yuha",
+      "Carmen",
+      "Jiwoo"
+    ],
+
+    correct:"Stella"
+  },
+
+
+  {
+    question:
+      "Which member has a cat named Aru?",
+
+    answers:[
+      "Ian",
+      "Juun",
+      "Ye-on",
+      "A-na"
+    ],
+
+    correct:"Ian"
+  },
+
+
+  {
+    question:
+      "Which member is known for being able to tie her hair into a bun in three seconds?",
+
+    answers:[
+      "Ian",
+      "Yuha",
+      "Stella",
+      "Jiwoo"
+    ],
+
+    correct:"Ian"
+  },
+
+
+  {
+    question:
+      "Which member won first place for piano at the 4th Chuncheon City National Music Competition?",
+
+    answers:[
+      "Yuha",
+      "Carmen",
       "Stella",
       "Juun"
     ],
-    answer:0,
-    explanation:
-      "Carmen can play the piano, guitar, drums, and violin."
+
+    correct:"Yuha"
   },
 
 
   {
-    q:"Which member is Korean-Canadian?",
-    options:[
-      "Jiwoo",
+    question:
+      "Which member is known for crying when she is angry or when someone else is crying?",
+
+    answers:[
+      "A-na",
+      "Ye-on",
+      "Carmen",
+      "Juun"
+    ],
+
+    correct:"A-na"
+  },
+
+
+  {
+    question:
+      "Which member says she can guess people's MBTIs almost instantly?",
+
+    answers:[
+      "Ye-on",
+      "Ian",
       "Stella",
-      "Yuha",
-      "Ian"
-    ],
-    answer:1,
-    explanation:
-      "Stella is listed as Korean-Canadian."
-  },
-
-
-  {
-    q:"Which member was born on Hangul Day, October 9?",
-    options:[
-      "Ian",
-      "Ye-on",
-      "Juun",
-      "A-na"
-    ],
-    answer:0,
-    explanation:
-      "Ian was born on October 9, which is Hangul Day."
-  },
-
-
-  {
-    q:"Which member is an only child and has a cat named Aru?",
-    options:[
-      "Ian",
-      "Ye-on",
-      "Juun",
       "Jiwoo"
     ],
-    answer:0,
-    explanation:
-      "Ian is an only child and has a cat named Aru."
+
+    correct:"Ye-on"
   },
 
 
   {
-    q:"Which member has a pet Toy Poodle named Haneul?",
-    options:[
-      "Juun",
-      "A-na",
+    question:
+      "Which member was born in Denpasar, Bali, Indonesia?",
+
+    answers:[
       "Carmen",
-      "Yuha"
-    ],
-    answer:0,
-    explanation:
-      "Juun's family has a Toy Poodle named Haneul."
-  },
-
-
-  {
-    q:"Which member is described as the 'Firecracker' of Hearts2Hearts?",
-    options:[
       "A-na",
-      "Ian",
-      "Carmen",
-      "Stella"
-    ],
-    answer:0,
-    explanation:
-      "A-na considers herself the 'Firecracker' of Hearts2Hearts."
-  },
-
-
-  {
-    q:"Which member is considered the mood-maker of Hearts2Hearts?",
-    options:[
-      "Ian",
-      "Juun",
-      "Carmen",
-      "Yuha"
-    ],
-    answer:0,
-    explanation:
-      "Ian is described as the mood-maker of Hearts2Hearts."
-  },
-
-
-  {
-    q:"Which member can tie her hair into a bun in three seconds?",
-    options:[
-      "Ian",
-      "Stella",
-      "A-na",
-      "Jiwoo"
-    ],
-    answer:0,
-    explanation:
-      "Ian can tie her hair in a bun in three seconds."
-  },
-
-
-  {
-    q:"Which member is the tallest member of Hearts2Hearts?",
-    options:[
-      "A-na",
-      "Carmen",
-      "Stella",
-      "Ye-on"
-    ],
-    answer:0,
-    explanation:
-      "A-na is listed as the tallest member, at approximately 171 cm."
-  },
-
-
-  {
-    q:"Which member picked the 🧁 emoji because she wanted fans to think of her whenever they see something cute?",
-    options:[
-      "Stella",
-      "Yuha",
-      "Ye-on",
-      "Carmen"
-    ],
-    answer:0,
-    explanation:
-      "Stella chose 🧁 as her representative emoji for that reason."
-  },
-
-
-  {
-    q:"Which member has perfect pitch?",
-    options:[
-      "Yuha",
-      "Jiwoo",
-      "Stella",
-      "Carmen"
-    ],
-    answer:0,
-    explanation:
-      "Yuha is noted as having perfect pitch."
-  },
-
-
-  {
-    q:"Which member sees herself as the 'Cutie' of Hearts2Hearts?",
-    options:[
-      "Ye-on",
-      "Juun",
-      "A-na",
-      "Ian"
-    ],
-    answer:0,
-    explanation:
-      "Ye-on sees herself as the 'Cutie' of Hearts2Hearts."
-  },
-
-
-  {
-    q:"Which member is known for imitating NPC characters?",
-    options:[
-      "Juun",
-      "Ian",
       "Yuha",
       "Stella"
     ],
-    answer:0,
-    explanation:
-      "Juun's specialty is imitating NPC characters."
+
+    correct:"Carmen"
   },
 
 
   {
-    q:"Which member can fold her tongue in half?",
-    options:[
-      "A-na",
-      "Carmen",
+    question:
+      "Which member is a fan of Minecraft and Animal Crossing: New Horizons?",
+
+    answers:[
+      "Stella",
+      "Ian",
       "Juun",
       "Ye-on"
     ],
-    answer:0,
-    explanation:
-      "A-na can fold her tongue in half."
+
+    correct:"Stella"
   },
 
 
   {
-    q:"Which member has a pet cat named Leo?",
-    options:[
-      "Ye-on",
-      "Carmen",
-      "Ian",
-      "Stella"
-    ],
-    answer:0,
-    explanation:
-      "Ye-on has a pet cat named Leo."
-  },
+    question:
+      "Which member's representative emoji is a strawberry?",
 
-
-  {
-    q:"Which member moved to Vancouver, Canada when she was 4 or 5 years old?",
-    options:[
-      "Stella",
-      "Carmen",
-      "Yuha",
-      "A-na"
-    ],
-    answer:0,
-    explanation:
-      "Stella moved to Vancouver, British Columbia, when she was 4 or 5."
-  },
-
-
-  {
-    q:"Which member auditioned by singing 'Price Tag' by Jessie J?",
-    options:[
-      "Ye-on",
-      "Ian",
-      "Juun",
-      "A-na"
-    ],
-    answer:0,
-    explanation:
-      "Ye-on sang 'Price Tag' by Jessie J at her first audition."
-  },
-
-
-  {
-    q:"Which member auditioned with 'Let It Go' from Frozen?",
-    options:[
-      "Ian",
+    answers:[
+      "Jiwoo",
       "Yuha",
       "Carmen",
-      "Stella"
-    ],
-    answer:0,
-    explanation:
-      "Ian sang 'Let It Go' from Frozen at her first audition."
-  },
-
-
-  {
-    q:"Which member sang 'Holo' by Lee Hi at her first audition?",
-    options:[
-      "Juun",
-      "Jiwoo",
-      "Ye-on",
       "A-na"
     ],
-    answer:0,
-    explanation:
-      "Juun sang 'Holo' by Lee Hi at her first audition."
-  },
 
-
-  {
-    q:"Which member's mother is a professional singer?",
-    options:[
-      "Carmen",
-      "Stella",
-      "Jiwoo",
-      "Yuha"
-    ],
-    answer:0,
-    explanation:
-      "Carmen's mother, Ayu Handayani, is a professional singer."
+    correct:"Jiwoo"
   }
 
 ];
 
 
 /* =====================================================
-   VARIABLES
+   GAME VARIABLES
 ===================================================== */
 
 let currentQuestion = 0;
+
 let score = 0;
-let favorite = null;
+
+let favoriteMember = "";
+
 let answered = false;
 
 
@@ -1069,84 +1213,50 @@ let answered = false;
    ELEMENTS
 ===================================================== */
 
-const memberGrid =
-  document.getElementById("memberGrid");
-
 const favoriteScreen =
-  document.getElementById("favoriteScreen");
+  document.getElementById(
+    "favoriteScreen"
+  );
 
 const quizScreen =
-  document.getElementById("quizScreen");
+  document.getElementById(
+    "quizScreen"
+  );
 
 const resultScreen =
-  document.getElementById("resultScreen");
-
-const questionNumber =
-  document.getElementById("questionNumber");
+  document.getElementById(
+    "resultScreen"
+  );
 
 const questionText =
-  document.getElementById("question");
+  document.getElementById(
+    "questionText"
+  );
 
-const options =
-  document.getElementById("options");
-
-const feedback =
-  document.getElementById("feedback");
+const answers =
+  document.getElementById(
+    "answers"
+  );
 
 const nextButton =
-  document.getElementById("nextButton");
+  document.getElementById(
+    "nextButton"
+  );
 
 const scoreText =
-  document.getElementById("score");
+  document.getElementById(
+    "score"
+  );
 
-const progressText =
-  document.getElementById("progressText");
+const questionNumber =
+  document.getElementById(
+    "questionNumber"
+  );
 
 const progressFill =
-  document.getElementById("progressFill");
-
-const favoriteResult =
-  document.getElementById("favoriteResult");
-
-
-/* =====================================================
-   FAVORITE MEMBER SCREEN
-===================================================== */
-
-function renderMembers(){
-
-  memberGrid.innerHTML = "";
-
-  members.forEach(member => {
-
-    const button =
-      document.createElement("button");
-
-    button.className =
-      "memberChoice";
-
-    button.innerHTML = `
-
-      <img
-        src="${member.image}"
-        alt="${member.name}"
-        onerror="this.style.display='none'"
-      >
-
-      <span>
-        ${member.emoji} ${member.name}
-      </span>
-
-    `;
-
-    button.onclick = () =>
-      chooseFavorite(member);
-
-    memberGrid.appendChild(button);
-
-  });
-
-}
+  document.getElementById(
+    "progressFill"
+  );
 
 
 /* =====================================================
@@ -1155,7 +1265,7 @@ function renderMembers(){
 
 function chooseFavorite(member){
 
-  favorite = member;
+  favoriteMember = member;
 
   favoriteScreen.style.display =
     "none";
@@ -1163,79 +1273,24 @@ function chooseFavorite(member){
   quizScreen.style.display =
     "block";
 
-  favoriteResult.innerHTML = `
-
-    <img
-      src="${member.image}"
-      alt="${member.name}"
-    >
-
-    <br><br>
-
-    💗 Your favorite is
-    <strong>${member.name}</strong>!
-
-  `;
-
-  favoriteResult.classList.add("show");
-
   currentQuestion = 0;
+
   score = 0;
 
-  scoreText.textContent = "0";
+  scoreText.textContent = score;
 
-  showQuestion();
-
-}
-
-
-/* =====================================================
-   SHUFFLE
-===================================================== */
-
-function shuffle(array){
-
-  const copy = [...array];
-
-  for(
-    let i = copy.length - 1;
-    i > 0;
-    i--
-  ){
-
-    const j =
-      Math.floor(
-        Math.random() * (i + 1)
-      );
-
-    [
-      copy[i],
-      copy[j]
-    ] =
-    [
-      copy[j],
-      copy[i]
-    ];
-
-  }
-
-  return copy;
+  loadQuestion();
 
 }
 
 
 /* =====================================================
-   SHOW QUESTION
+   LOAD QUESTION
 ===================================================== */
 
-function showQuestion(){
+function loadQuestion(){
 
   answered = false;
-
-  feedback.className =
-    "feedback";
-
-  feedback.textContent = "";
 
   nextButton.classList.remove(
     "show"
@@ -1244,65 +1299,50 @@ function showQuestion(){
   const q =
     questions[currentQuestion];
 
-  const number =
-    currentQuestion + 1;
-
-  const total =
-    questions.length;
 
   questionNumber.textContent =
-    `QUESTION ${number}`;
+    currentQuestion + 1;
 
-  progressText.textContent =
-    `${number} / ${total}`;
 
   questionText.textContent =
-    q.q;
+    q.question;
+
+
+  answers.innerHTML = "";
+
 
   progressFill.style.width =
-    `${(number / total) * 100}%`;
-
-  options.innerHTML = "";
-
-
-  /*
-    Shuffle answer choices while
-    keeping the correct answer.
-  */
-
-  const shuffled =
-    q.options.map(
-      (label,index) => ({
-        label,
-        correct:
-          index === q.answer
-      })
-    );
-
-  const randomized =
-    shuffle(shuffled);
+    (
+      currentQuestion /
+      questions.length
+      * 100
+    ) + "%";
 
 
-  randomized.forEach(
-    optionData => {
+  q.answers.forEach(
+    answer => {
 
       const button =
-        document.createElement("button");
-
-      button.className =
-        "option";
-
-      button.textContent =
-        optionData.label;
-
-      button.onclick = () =>
-        answerQuestion(
-          button,
-          optionData.correct,
-          q.explanation
+        document.createElement(
+          "button"
         );
 
-      options.appendChild(button);
+      button.className =
+        "answer";
+
+      button.textContent =
+        answer;
+
+      button.onclick =
+        () => checkAnswer(
+          button,
+          answer,
+          q.correct
+        );
+
+      answers.appendChild(
+        button
+      );
 
     }
   );
@@ -1311,97 +1351,75 @@ function showQuestion(){
 
 
 /* =====================================================
-   ANSWER
+   CHECK ANSWER
 ===================================================== */
 
-function answerQuestion(
-  clickedButton,
-  correct,
-  explanation
+function checkAnswer(
+  button,
+  selected,
+  correct
 ){
 
-  if(answered)
+  if(answered){
+
     return;
+
+  }
 
   answered = true;
 
 
-  const allOptions =
+  const allAnswers =
     document.querySelectorAll(
-      ".option"
+      ".answer"
     );
 
 
-  allOptions.forEach(button => {
+  allAnswers.forEach(
+    answerButton => {
 
-    button.disabled = true;
+      answerButton.classList.add(
+        "disabled"
+      );
 
-  });
+      if(
+        answerButton.textContent ===
+        correct
+      ){
+
+        answerButton.classList.add(
+          "correct"
+        );
+
+      }
+
+    }
+  );
 
 
-  if(correct){
+  if(selected === correct){
+
+    button.classList.add(
+      "correct"
+    );
 
     score++;
 
     scoreText.textContent =
       score;
 
-    clickedButton.classList.add(
-      "correct"
-    );
-
-    feedback.classList.add(
-      "show",
-      "good"
-    );
-
-    feedback.innerHTML =
-      `✨ Correct! ${explanation}`;
-
   }else{
 
-    clickedButton.classList.add(
+    button.classList.add(
       "wrong"
     );
 
-
-    /*
-      Highlight correct answer.
-    */
-
-    allOptions.forEach(button => {
-
-      /*
-        Compare button text with
-        the actual correct answer.
-      */
-
-      const q =
-        questions[currentQuestion];
-
-      if(
-        button.textContent ===
-        q.options[q.answer]
-      ){
-
-        button.classList.add(
-          "correct"
-        );
-
-      }
-
-    });
-
-
-    feedback.classList.add(
-      "show",
-      "bad"
-    );
-
-    feedback.innerHTML =
-      `💔 Not quite! ${explanation}`;
-
   }
+
+
+  nextButton.classList.add(
+    "show"
+  );
 
 
   if(
@@ -1410,29 +1428,33 @@ function answerQuestion(
   ){
 
     nextButton.textContent =
-      "SEE MY RESULTS 💗";
+      "SEE MY SCORE 🩵";
 
   }else{
 
     nextButton.textContent =
-      "NEXT QUESTION 💗";
+      "NEXT QUESTION →";
 
   }
-
-  nextButton.classList.add(
-    "show"
-  );
 
 }
 
 
 /* =====================================================
-   NEXT
+   NEXT QUESTION
 ===================================================== */
 
-nextButton.onclick = () => {
+function nextQuestion(){
+
+  if(!answered){
+
+    return;
+
+  }
+
 
   currentQuestion++;
+
 
   if(
     currentQuestion >=
@@ -1441,17 +1463,18 @@ nextButton.onclick = () => {
 
     showResults();
 
-  }else{
-
-    showQuestion();
+    return;
 
   }
 
-};
+
+  loadQuestion();
+
+}
 
 
 /* =====================================================
-   RESULTS
+   SHOW RESULTS
 ===================================================== */
 
 function showResults(){
@@ -1465,54 +1488,64 @@ function showResults(){
 
 
   document.getElementById(
-    "finalScore"
+    "resultScore"
   ).textContent =
-    `${score}/${questions.length}`;
+    score +
+    " / " +
+    questions.length;
 
 
-  const percentage =
-    Math.round(
-      score /
-      questions.length *
-      100
-    );
+  document.getElementById(
+    "favoriteResult"
+  ).textContent =
+    favoriteMember;
 
 
   let message;
 
 
+  const percentage =
+    score /
+    questions.length *
+    100;
+
+
   if(percentage === 100){
 
     message =
-      "💎 PERFECT! You know Hearts2Hearts incredibly well!";
+      "PERFECT SCORE! 🩵 You really know your Hearts2Hearts facts!";
 
   }else if(percentage >= 80){
 
     message =
-      "🌟 Amazing! You're a true H2H fan!";
+      "Amazing! 🌟 You know Hearts2Hearts really well!";
 
   }else if(percentage >= 60){
 
     message =
-      "💗 Nice! You know your Hearts2Hearts facts!";
+      "Great job! 🩵 You definitely know your H2H facts!";
 
   }else if(percentage >= 40){
 
     message =
-      "✨ Not bad! Time for another round!";
+      "Not bad! 💫 Time for another round to learn even more!";
 
   }else{
 
     message =
-      "🌱 Keep learning about Hearts2Hearts and try again!";
+      "Aww! 🩵 Looks like you need another Hearts2Hearts study session!";
 
   }
 
 
   document.getElementById(
-    "resultText"
+    "resultMessage"
   ).textContent =
-    `${message} You scored ${percentage}%.`;
+    message;
+
+
+  progressFill.style.width =
+    "100%";
 
 }
 
@@ -1521,30 +1554,49 @@ function showResults(){
    RESTART
 ===================================================== */
 
-document.getElementById(
-  "restartButton"
-).onclick = () => {
+function restartQuiz(){
+
+  currentQuestion = 0;
+
+  score = 0;
+
+  favoriteMember = "";
+
+  answered = false;
+
 
   resultScreen.classList.remove(
     "show"
   );
 
+
   quizScreen.style.display =
     "none";
+
 
   favoriteScreen.style.display =
     "block";
 
-  favoriteResult.classList.remove(
-    "show"
-  );
-
-  score = 0;
-  currentQuestion = 0;
-  favorite = null;
 
   scoreText.textContent =
     "0";
+
+
+  progressFill.style.width =
+    "0%";
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+</script>
+
+</body>
+
+</html>    "0";
 
   progressFill.style.width =
     "0%";
